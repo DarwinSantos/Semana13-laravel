@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contact;
 use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -13,11 +14,27 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $contacts=Contact::all();
+        $parametro = $request->get('buscarpor');
+        $contacts = DB::table('contacts')->where('apellidos','like',"%$parametro%")->get();
+        
+        //$contacts['contact']=Contact::where('apellidos','like',"%$parametro%");
+
+        //$contacts=Contact::where('apellidos','like',"%$parametro%");
+        //$contacts=Contact::->where('apellidos','like',"%$parametro%");
         return view('contacts.index',compact('contacts'));
     }
+
+/*     public function index2(Request $request)
+    {
+        //
+        $parametro= $request->get('buscarpor');
+        $datos['contactos']=contactos::where('apellidos','like',"%$parametro%")->paginate(5);
+
+        //$datos['contactos']=contactos::paginate(8);
+        return view('contactos.index',$datos);
+    } */
 
     /**
      * Show the form for creating a new resource.

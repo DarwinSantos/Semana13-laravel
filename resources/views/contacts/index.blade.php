@@ -1,10 +1,10 @@
 @extends('base')
 @section('main')
 <nav class="navbar navbar-light mt-3">
-    <a class="btn btn-primary" href="{{ route('contacts.create')}}" >
-        Agregar Contacto
-    </a>
 
+    <a class="btn btn-info" href="{{ route('contacts.index')}}" >
+        Agenda
+    </a>
     @if (Route::has('login'))
                     @auth
                     <li class="navbar-brand btn btn-outline-info text-inf dropdown">
@@ -33,10 +33,20 @@
                     @endauth
             @endif
   </nav>
-<div>  
+<div class="">  
 <div class="row"><div class="col-sm-12">    
-    <h1 class="d-flex justify-content-center py-4">Lista de Contactos</h1>      
-    <table class="table table-dark">    
+    <h1 class="d-flex justify-content-center py-4">Lista de Contactos</h1>
+    <div>
+    <form class="form-inline float-left">
+        <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="ingrese Apellido" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+
+    <a class="btn btn-primary btn-sm float-right" href="{{ route('contacts.create')}}" >
+        Agregar Contacto
+    </a>
+    </div>      
+    <table class="table table-dark" style="margin-top:70px">    
         <thead>       
         <tr>          
             <td>Codigo</td>          
