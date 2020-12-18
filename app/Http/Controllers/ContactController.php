@@ -17,7 +17,7 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $parametro = $request->get('buscarpor');
-        $contacts = DB::table('contacts')->where('apellidos','like',"%$parametro%")->get();
+        $contacts = DB::table('contacts')->where('apellidos','like',"%$parametro%")->orderBy('id','Desc')->get();
         
         //$contacts['contact']=Contact::where('apellidos','like',"%$parametro%");
 
